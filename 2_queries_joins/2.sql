@@ -16,3 +16,27 @@ ON student_id = students.id
 JOIN cohorts
 ON cohort_id = cohorts.id
 WHERE cohorts.name = 'FEB12';
+
+
+SELECT students.name as student, COUNT(assignment_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students
+ON student_id = students.id
+GROUP BY students.name;
+
+
+SELECT students.name as student, COUNT(assignment_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students
+ON student_id = students.id
+WHERE students.end_date IS NULL
+GROUP BY students.name;
+
+
+SELECT students.name as student, COUNT(assignment_submissions.*) as total_submissions
+FROM assignment_submissions
+JOIN students
+ON student_id = students.id
+WHERE students.end_date IS NULL 
+GROUP BY students.name
+HAVING COUNT(assignment_submissions.*) < 100;
